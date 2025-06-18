@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deteksi Kelelahan Pengemudi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .main-content { /* Kontainer utama untuk mengatur dua kontainer video dan canvas berdampingan */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        .container-video, .container-canvas {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            /* Ukuran dasar untuk kontainer agar tidak terlalu besar */
+            width: fit-content; /* Sesuaikan dengan lebar kontennya */
+        }
+        .container-video {
+            /* Drop shadow untuk kontainer video (gelap) */
+            box-shadow: 30px 30px 48px rgba(0, 0, 0, 0.25);
+        }
+        .container-canvas {
+            /* Drop shadow untuk kontainer canvas (terang) */
+            box-shadow: -30px -30px 48px rgba(255, 255, 255, 0.7);
+        }
+        #webcam, #output_canvas {
+            transform: scaleX(-1);
+            display: block;
+            margin: 0; /* Hapus margin auto karena sudah diatur oleh flexbox pada main-content */
+            border: 3px solid #333;
+            border-radius: 8px;
+            background: #000;
+        }
+        #status {
+            font-size: 24px;
+            margin-top: 15px;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            /* Inner shadow untuk status */
+            box-shadow: inset 30px 30px 50px rgba(13, 43, 80, 0.16),
+                        inset -30px -30px 50px rgba(255, 255, 255, 0.7);
+            display: inline-block; /* Agar padding dan background diterapkan dengan baik */
+        }
+        #debug {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+</head>
+<body>
+    <h1>AI Deteksi Kelelahan Pengemudi</h1>
+    <div class="main-content">
+        <div class="container-video">
+            <video id="webcam" playsinline></video>
+        </div>
+        <div class="container-canvas">
+            <canvas id="output_canvas" width="640" height="480"></canvas>
+        </div>
+    </div>
+    <p id="status">Status: <span id="statusText">Normal</span></p>
+    <p id="debug">Debug: <span id="debugText">-</span></p>
+    <script src="app.js"></script>
+</body>
+</html>
